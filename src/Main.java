@@ -8,7 +8,7 @@ public class Main {
         myLinkedList.append(7);
         myLinkedList.append(8);
 
-        myLinkedList.insert(1,23);
+        myLinkedList.reverse();
         myLinkedList.printList();
 
     }
