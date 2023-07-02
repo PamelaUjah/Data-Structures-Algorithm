@@ -3,15 +3,15 @@ package LeetCode;
 public class Main {
     public static void main(String[] args) {
 
-        LinkedList myLinkedList = new LinkedList(1);
-        myLinkedList.append(2);
-        myLinkedList.append(3);
-        myLinkedList.append(4);
-        myLinkedList.append(5);
+        FindMiddleNode myFindMiddleNode = new FindMiddleNode(1);
+        myFindMiddleNode.append(2);
+        myFindMiddleNode.append(3);
+        myFindMiddleNode.append(4);
+        myFindMiddleNode.append(5);
 
 
         System.out.println("Middle Node:");
-        System.out.println(myLinkedList.findMiddleNode().value);
+        System.out.println(myFindMiddleNode.findMiddleNode().value);
 
 
         /*
