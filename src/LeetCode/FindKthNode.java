@@ -1,10 +1,9 @@
 package LeetCode;
 
-public class HasLoop {
+public class FindKthNode {
 
     private Node head;
     private Node tail;
-    private int length;
 
     class Node {
         int value;
@@ -15,11 +14,10 @@ public class HasLoop {
         }
     }
 
-    public HasLoop(int value) {
+    public FindKthNode(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
-        length = 1;
     }
 
     public Node getHead() {
@@ -28,10 +26,6 @@ public class HasLoop {
 
     public Node getTail() {
         return tail;
-    }
-
-    public int getLength() {
-        return length;
     }
 
     public void printList() {
@@ -43,16 +37,15 @@ public class HasLoop {
     }
 
     public void printAll() {
-        if (length == 0) {
+        if (head == null) {
             System.out.println("Head: null");
             System.out.println("Tail: null");
         } else {
             System.out.println("Head: " + head.value);
             System.out.println("Tail: " + tail.value);
         }
-        System.out.println("Length:" + length);
         System.out.println("\nLinked List:");
-        if (length == 0) {
+        if (head == null) {
             System.out.println("empty");
         } else {
             printList();
@@ -62,33 +55,36 @@ public class HasLoop {
     public void makeEmpty() {
         head = null;
         tail = null;
-        length = 0;
     }
 
     public void append(int value) {
         Node newNode = new Node(value);
-        if (length == 0) {
+        if (head == null) {
             head = newNode;
             tail = newNode;
         } else {
             tail.next = newNode;
             tail = newNode;
         }
-        length++;
     }
 
-    public boolean hasLoop() {
-        Node fast = head;
+    public Node findKthFromEnd(int k) {
         Node slow = head;
+        Node fast = head;
 
-        while (fast != null && fast.next != null) {
-            fast = fast.next.next;
-            slow = slow.next;
-
-            if (slow == fast) {
-                return true;
+        for (int i = 0; i < k; i++) {
+            if (fast == null) {
+                return null;
             }
+            fast = fast.next;
+
         }
-        return false;
+
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow;
+
     }
 }
