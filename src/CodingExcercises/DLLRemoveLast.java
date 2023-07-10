@@ -1,6 +1,6 @@
-package LeetCode;
+package CodingExcercises;
 
-public class DLLAppend {
+public class DLLRemoveLast {
     private Node head;
     private Node tail;
     private int length;
@@ -15,7 +15,7 @@ public class DLLAppend {
         }
     }
 
-    public DLLAppend(int value) {
+    public DLLRemoveLast(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -52,16 +52,32 @@ public class DLLAppend {
 
     public void append(int value) {
         Node newNode = new Node(value);
-
         if (length == 0) {
-            tail = newNode;
             head = newNode;
+            tail = newNode;
         } else {
             tail.next = newNode;
             newNode.prev = tail;
             tail = newNode;
         }
         length++;
+    }
+
+    public Node removeLast() {
+        Node temp = tail;
+        if (head == null || tail == null) {
+            return null;
+        } else if (length == 1) {
+            head = null;
+            tail = null;
+            length--;
+        } else {
+            tail = tail.prev;
+            tail.next = null;
+            temp.prev = null;
+            length--;
+        }
+        return temp;
     }
 
 }

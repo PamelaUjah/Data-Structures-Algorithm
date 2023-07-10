@@ -1,6 +1,6 @@
-package LeetCode;
+package CodingExcercises;
 
-public class DLLRemoveLast {
+public class DLLPrepend {
     private Node head;
     private Node tail;
     private int length;
@@ -15,11 +15,23 @@ public class DLLRemoveLast {
         }
     }
 
-    public DLLRemoveLast(int value) {
+    public DLLPrepend(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
         length = 1;
+    }
+
+    public Node getHead() {
+        return head;
+    }
+
+    public Node getTail() {
+        return tail;
+    }
+
+    public int getLength() {
+        return length;
     }
 
     public void printList() {
@@ -30,24 +42,27 @@ public class DLLRemoveLast {
         }
     }
 
-    public void getHead() {
-        if (head == null) {
+    public void printAll() {
+        if (length == 0) {
             System.out.println("Head: null");
-        } else {
-            System.out.println("Head: " + head.value);
-        }
-    }
-
-    public void getTail() {
-        if (head == null) {
             System.out.println("Tail: null");
         } else {
+            System.out.println("Head: " + head.value);
             System.out.println("Tail: " + tail.value);
+        }
+        System.out.println("Length:" + length);
+        System.out.println("\nDoubly Linked List:");
+        if (length == 0) {
+            System.out.println("empty");
+        } else {
+            printList();
         }
     }
 
-    public void getLength() {
-        System.out.println("Length: " + length);
+    public void makeEmpty() {
+        head = null;
+        tail = null;
+        length = 0;
     }
 
     public void append(int value) {
@@ -64,20 +79,33 @@ public class DLLRemoveLast {
     }
 
     public Node removeLast() {
+        if (length == 0) return null;
         Node temp = tail;
-        if (head == null || tail == null) {
-            return null;
-        } else if (length == 1) {
+        if (length == 1) {
             head = null;
             tail = null;
-            length--;
         } else {
             tail = tail.prev;
             tail.next = null;
             temp.prev = null;
-            length--;
         }
+        length--;
         return temp;
     }
 
+
+    public void prepend(int value) {
+        Node newNode = new Node(value);
+
+        if (length == 0) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+            length++;
+        }
+
+    }
 }
