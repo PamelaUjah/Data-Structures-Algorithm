@@ -1,4 +1,4 @@
-package LeetCode;
+package DoublyLinkedLists;
 
 public class Reverse {
     private Node head;

@@ -1,23 +1,26 @@
-package LeetCode;
+package DoublyLinkedLists;
 
-public class FindKthNode {
+public class SwapFirstAndLast {
 
     private Node head;
     private Node tail;
+    private int length;
 
     class Node {
         int value;
         Node next;
+        Node prev;
 
         Node(int value) {
             this.value = value;
         }
     }
 
-    public FindKthNode(int value) {
+    public SwapFirstAndLast(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
+        length = 1;
     }
 
     public Node getHead() {
@@ -26,6 +29,10 @@ public class FindKthNode {
 
     public Node getTail() {
         return tail;
+    }
+
+    public int getLength() {
+        return length;
     }
 
     public void printList() {
@@ -37,15 +44,16 @@ public class FindKthNode {
     }
 
     public void printAll() {
-        if (head == null) {
+        if (length == 0) {
             System.out.println("Head: null");
             System.out.println("Tail: null");
         } else {
             System.out.println("Head: " + head.value);
             System.out.println("Tail: " + tail.value);
         }
-        System.out.println("\nLinked List:");
-        if (head == null) {
+        System.out.println("Length:" + length);
+        System.out.println("\nDoubly Linked List:");
+        if (length == 0) {
             System.out.println("empty");
         } else {
             printList();
@@ -55,36 +63,30 @@ public class FindKthNode {
     public void makeEmpty() {
         head = null;
         tail = null;
+        length = 0;
     }
 
     public void append(int value) {
         Node newNode = new Node(value);
-        if (head == null) {
+        if (length == 0) {
             head = newNode;
             tail = newNode;
         } else {
             tail.next = newNode;
+            newNode.prev = tail;
             tail = newNode;
         }
+        length++;
     }
 
-    public Node findKthFromEnd(int k) {
-        Node slow = head;
-        Node fast = head;
-
-        for (int i = 0; i < k; i++) {
-            if (fast == null) {
-                return null;
-            }
-            fast = fast.next;
-
+    public void swapFirstLast() {
+        if (length < 2) {
+            return;
+        } else {
+            int temp = head.value;
+            head.value = tail.value;
+            tail.value = temp;
         }
-
-        while (fast != null) {
-            slow = slow.next;
-            fast = fast.next;
-        }
-        return slow;
-
     }
+
 }

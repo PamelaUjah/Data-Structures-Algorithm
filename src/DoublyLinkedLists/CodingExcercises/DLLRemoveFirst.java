@@ -1,7 +1,6 @@
-package CodingExcercises;
+package DoublyLinkedLists.CodingExcercises;
 
-public class DLLInsert {
-
+public class DLLRemoveFirst {
     private Node head;
     private Node tail;
     private int length;
@@ -16,11 +15,23 @@ public class DLLInsert {
         }
     }
 
-    public DLLInsert(int value) {
+    public DLLRemoveFirst(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
         length = 1;
+    }
+
+    public Node getHead() {
+        return head;
+    }
+
+    public Node getTail() {
+        return tail;
+    }
+
+    public int getLength() {
+        return length;
     }
 
     public void printList() {
@@ -31,24 +42,27 @@ public class DLLInsert {
         }
     }
 
-    public void getHead() {
-        if (head == null) {
+    public void printAll() {
+        if (length == 0) {
             System.out.println("Head: null");
-        } else {
-            System.out.println("Head: " + head.value);
-        }
-    }
-
-    public void getTail() {
-        if (head == null) {
             System.out.println("Tail: null");
         } else {
+            System.out.println("Head: " + head.value);
             System.out.println("Tail: " + tail.value);
+        }
+        System.out.println("Length:" + length);
+        System.out.println("\nDoubly Linked List:");
+        if (length == 0) {
+            System.out.println("empty");
+        } else {
+            printList();
         }
     }
 
-    public void getLength() {
-        System.out.println("Length: " + length);
+    public void makeEmpty() {
+        head = null;
+        tail = null;
+        length = 0;
     }
 
     public void append(int value) {
@@ -93,65 +107,19 @@ public class DLLInsert {
     }
 
     public Node removeFirst() {
-        if (length == 0) return null;
         Node temp = head;
-        if (length == 1) {
+        if (length == 0) {
+            return null;
+        } else if (length == 1) {
             head = null;
             tail = null;
+            length--;
         } else {
             head = head.next;
             head.prev = null;
             temp.next = null;
-        }
-        length--;
-        return temp;
-    }
-
-    public Node get(int index) {
-        if (index < 0 || index >= length) return null;
-        Node temp = head;
-        if (index < length / 2) {
-            for (int i = 0; i < index; i++) {
-                temp = temp.next;
-            }
-        } else {
-            temp = tail;
-            for (int i = length - 1; i > index; i--) {
-                temp = temp.prev;
-            }
+            length--;
         }
         return temp;
-    }
-
-    public boolean set(int index, int value) {
-        Node temp = get(index);
-        if (temp != null) {
-            temp.value = value;
-            return true;
-        }
-        return false;
-    }
-
-    public boolean insert(int index, int value) {
-
-        if (index < 0 || index > length) {
-            return false;
-        } else if (index == 0) {
-            prepend(value);
-            return true;
-        } else if (index == length) {
-            append(value);
-            return true;
-        } else {
-            Node newNode = new Node(value);
-            Node before = get(index - 1);
-            Node after = before.next;
-            newNode.prev = before;
-            newNode.next = after;
-            before.next = newNode;
-            after.prev = newNode;
-            length++;
-            return true;
-        }
     }
 }

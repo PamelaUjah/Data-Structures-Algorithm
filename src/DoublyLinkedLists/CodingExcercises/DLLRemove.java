@@ -1,4 +1,4 @@
-package CodingExcercises;
+package DoublyLinkedLists.CodingExcercises;
 
 public class DLLRemove {
 

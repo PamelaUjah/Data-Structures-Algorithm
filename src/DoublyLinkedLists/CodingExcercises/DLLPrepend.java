@@ -1,6 +1,6 @@
-package CodingExcercises;
+package DoublyLinkedLists.CodingExcercises;
 
-public class DLLRemoveFirst {
+public class DLLPrepend {
     private Node head;
     private Node tail;
     private int length;
@@ -15,7 +15,7 @@ public class DLLRemoveFirst {
         }
     }
 
-    public DLLRemoveFirst(int value) {
+    public DLLPrepend(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -93,8 +93,10 @@ public class DLLRemoveFirst {
         return temp;
     }
 
+
     public void prepend(int value) {
         Node newNode = new Node(value);
+
         if (length == 0) {
             head = newNode;
             tail = newNode;
@@ -102,24 +104,8 @@ public class DLLRemoveFirst {
             newNode.next = head;
             head.prev = newNode;
             head = newNode;
+            length++;
         }
-        length++;
-    }
 
-    public Node removeFirst() {
-        Node temp = head;
-        if (length == 0) {
-            return null;
-        } else if (length == 1) {
-            head = null;
-            tail = null;
-            length--;
-        } else {
-            head = head.next;
-            head.prev = null;
-            temp.next = null;
-            length--;
-        }
-        return temp;
     }
 }

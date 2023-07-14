@@ -1,9 +1,7 @@
-package LeetCode;
+package LinkedLists.Leetcode;
 
-public class HasLoop {
-
+public class ReverseBetween {
     private Node head;
-    private Node tail;
     private int length;
 
     class Node {
@@ -15,19 +13,14 @@ public class HasLoop {
         }
     }
 
-    public HasLoop(int value) {
+    public ReverseBetween(int value) {
         Node newNode = new Node(value);
         head = newNode;
-        tail = newNode;
         length = 1;
     }
 
     public Node getHead() {
         return head;
-    }
-
-    public Node getTail() {
-        return tail;
     }
 
     public int getLength() {
@@ -45,10 +38,8 @@ public class HasLoop {
     public void printAll() {
         if (length == 0) {
             System.out.println("Head: null");
-            System.out.println("Tail: null");
         } else {
             System.out.println("Head: " + head.value);
-            System.out.println("Tail: " + tail.value);
         }
         System.out.println("Length:" + length);
         System.out.println("\nLinked List:");
@@ -61,7 +52,6 @@ public class HasLoop {
 
     public void makeEmpty() {
         head = null;
-        tail = null;
         length = 0;
     }
 
@@ -69,26 +59,36 @@ public class HasLoop {
         Node newNode = new Node(value);
         if (length == 0) {
             head = newNode;
-            tail = newNode;
         } else {
-            tail.next = newNode;
-            tail = newNode;
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
         }
         length++;
     }
 
-    public boolean hasLoop() {
-        Node fast = head;
-        Node slow = head;
+    public void reverseBetween(int m, int n) {
+        if (head == null) return;
 
-        while (fast != null && fast.next != null) {
-            fast = fast.next.next;
-            slow = slow.next;
+        Node dummy = new Node(0);
+        dummy.next = head;
+        Node prev = dummy;
 
-            if (slow == fast) {
-                return true;
-            }
+        for (int i = 0; i < m; i++) {
+            prev = prev.next;
         }
-        return false;
+
+        Node current = prev.next;
+        for (int i = 0; i < n - m; i++) {
+            Node temp = current.next;
+            current.next = temp.next;
+            temp.next = prev.next;
+            prev.next = temp;
+        }
+
+        head = dummy.next;
+
     }
 }

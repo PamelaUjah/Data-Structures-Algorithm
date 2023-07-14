@@ -1,4 +1,6 @@
-package LeetCode;
+package LinkedLists;
+
+import LinkedLists.Leetcode.FindMiddleNode;
 
 public class Main {
     public static void main(String[] args) {

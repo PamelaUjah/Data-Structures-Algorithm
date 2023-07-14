@@ -1,8 +1,7 @@
-package LeetCode;
+package DoublyLinkedLists;
 
-import java.util.HashSet;
+public class PalindromeChecker {
 
-public class RemoveDuplicates {
     private Node head;
     private Node tail;
     private int length;
@@ -10,13 +9,14 @@ public class RemoveDuplicates {
     class Node {
         int value;
         Node next;
+        Node prev;
 
         Node(int value) {
             this.value = value;
         }
     }
 
-    public RemoveDuplicates(int value) {
+    public PalindromeChecker(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -52,7 +52,7 @@ public class RemoveDuplicates {
             System.out.println("Tail: " + tail.value);
         }
         System.out.println("Length:" + length);
-        System.out.println("\nLinked List:");
+        System.out.println("\nDoubly Linked List:");
         if (length == 0) {
             System.out.println("empty");
         } else {
@@ -73,26 +73,28 @@ public class RemoveDuplicates {
             tail = newNode;
         } else {
             tail.next = newNode;
+            newNode.prev = tail;
             tail = newNode;
         }
         length++;
     }
 
-    public void removeDuplicates() {
-        HashSet<Integer> values = new HashSet();
-        Node current = head;
-        Node previous = null;
+    public boolean isPalindrome() {
+        Node pointer1 = head;
+        Node pointer2 = tail;
 
-        while (current != null) {
-            if (values.contains(current.value)) {
-                previous.next = current.next;
-                length--;
-                current = current.next;
-            } else {
-                values.add(current.value);
-                previous = current;
-                current = current.next;
+        if (length <= 1) {
+            return true;
+        } else {
+            for (int i = 0; i < length / 2; i++) {
+                if (pointer1.value == pointer2.value) {
+                    pointer1 = pointer1.next;
+                    pointer2 = pointer2.prev;
+                } else {
+                    return false;
+                }
             }
+            return true;
         }
     }
 }

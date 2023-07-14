@@ -1,6 +1,6 @@
-package CodingExcercises;
+package DoublyLinkedLists.CodingExcercises;
 
-public class DLLRemoveLast {
+public class DLLAppend {
     private Node head;
     private Node tail;
     private int length;
@@ -15,7 +15,7 @@ public class DLLRemoveLast {
         }
     }
 
-    public DLLRemoveLast(int value) {
+    public DLLAppend(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -52,32 +52,16 @@ public class DLLRemoveLast {
 
     public void append(int value) {
         Node newNode = new Node(value);
+
         if (length == 0) {
-            head = newNode;
             tail = newNode;
+            head = newNode;
         } else {
             tail.next = newNode;
             newNode.prev = tail;
             tail = newNode;
         }
         length++;
-    }
-
-    public Node removeLast() {
-        Node temp = tail;
-        if (head == null || tail == null) {
-            return null;
-        } else if (length == 1) {
-            head = null;
-            tail = null;
-            length--;
-        } else {
-            tail = tail.prev;
-            tail.next = null;
-            temp.prev = null;
-            length--;
-        }
-        return temp;
     }
 
 }

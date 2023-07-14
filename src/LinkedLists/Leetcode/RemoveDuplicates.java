@@ -1,6 +1,8 @@
-package LeetCode;
+package LinkedLists.Leetcode;
 
-public class PartitionList {
+import java.util.HashSet;
+
+public class RemoveDuplicates {
     private Node head;
     private Node tail;
     private int length;
@@ -14,7 +16,7 @@ public class PartitionList {
         }
     }
 
-    public PartitionList(int value) {
+    public RemoveDuplicates(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -76,30 +78,21 @@ public class PartitionList {
         length++;
     }
 
-    public void partitionList(int x) {
-        if (head == null) {
-            return;
-        }
-
-        Node dummy1 = new Node(0);
-        Node dummy2 = new Node(0);
-        Node prev1 = dummy1;
-        Node prev2 = dummy2;
+    public void removeDuplicates() {
+        HashSet<Integer> values = new HashSet();
         Node current = head;
+        Node previous = null;
 
         while (current != null) {
-            if (current.value < x) {
-                prev1.next = current;
-                prev1 = current;
+            if (values.contains(current.value)) {
+                previous.next = current.next;
+                length--;
+                current = current.next;
             } else {
-                prev2.next = current;
-                prev2 = current;
+                values.add(current.value);
+                previous = current;
+                current = current.next;
             }
-            current = current.next;
         }
-
-        prev2.next = null;
-        prev1.next = dummy2.next;
-        head = dummy1.next;
     }
 }

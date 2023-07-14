@@ -1,8 +1,9 @@
-package LeetCode;
+package LinkedLists.Leetcode;
 
-public class ReverseBetween {
+public class FindKthNode {
+
     private Node head;
-    private int length;
+    private Node tail;
 
     class Node {
         int value;
@@ -13,18 +14,18 @@ public class ReverseBetween {
         }
     }
 
-    public ReverseBetween(int value) {
+    public FindKthNode(int value) {
         Node newNode = new Node(value);
         head = newNode;
-        length = 1;
+        tail = newNode;
     }
 
     public Node getHead() {
         return head;
     }
 
-    public int getLength() {
-        return length;
+    public Node getTail() {
+        return tail;
     }
 
     public void printList() {
@@ -36,14 +37,15 @@ public class ReverseBetween {
     }
 
     public void printAll() {
-        if (length == 0) {
+        if (head == null) {
             System.out.println("Head: null");
+            System.out.println("Tail: null");
         } else {
             System.out.println("Head: " + head.value);
+            System.out.println("Tail: " + tail.value);
         }
-        System.out.println("Length:" + length);
         System.out.println("\nLinked List:");
-        if (length == 0) {
+        if (head == null) {
             System.out.println("empty");
         } else {
             printList();
@@ -52,43 +54,37 @@ public class ReverseBetween {
 
     public void makeEmpty() {
         head = null;
-        length = 0;
+        tail = null;
     }
 
     public void append(int value) {
         Node newNode = new Node(value);
-        if (length == 0) {
+        if (head == null) {
             head = newNode;
+            tail = newNode;
         } else {
-            Node current = head;
-            while (current.next != null) {
-                current = current.next;
-            }
-            current.next = newNode;
+            tail.next = newNode;
+            tail = newNode;
         }
-        length++;
     }
 
-    public void reverseBetween(int m, int n) {
-        if (head == null) return;
+    public Node findKthFromEnd(int k) {
+        Node slow = head;
+        Node fast = head;
 
-        Node dummy = new Node(0);
-        dummy.next = head;
-        Node prev = dummy;
+        for (int i = 0; i < k; i++) {
+            if (fast == null) {
+                return null;
+            }
+            fast = fast.next;
 
-        for (int i = 0; i < m; i++) {
-            prev = prev.next;
         }
 
-        Node current = prev.next;
-        for (int i = 0; i < n - m; i++) {
-            Node temp = current.next;
-            current.next = temp.next;
-            temp.next = prev.next;
-            prev.next = temp;
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
         }
-
-        head = dummy.next;
+        return slow;
 
     }
 }

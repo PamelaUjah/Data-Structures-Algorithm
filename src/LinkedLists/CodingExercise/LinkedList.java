@@ -1,3 +1,4 @@
+package LinkedLists.CodingExercise;
 
 public class LinkedList {
     private Node head;
@@ -39,14 +40,11 @@ public class LinkedList {
     public Node remove(int index) {
         if (index < 0 || index >= length) {
             return null;
-        }
-        else if (index == 0) {
+        } else if (index == 0) {
             return removeFirst();
-        }
-        else if (index == length - 1){
+        } else if (index == length - 1){
             return removeLast();
-        }
-        else {
+        } else {
             Node prev = get(index - 1);
             Node temp = prev.next;
 
