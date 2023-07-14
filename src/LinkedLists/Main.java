@@ -13,8 +13,6 @@ public class Main {
 
 
         System.out.println("Middle Node:");
-        System.out.println(myFindMiddleNode.findMiddleNode().value);
-
 
         /*
             EXPECTED OUTPUT:
