@@ -1,0 +1,33 @@
+package stack;
+
+public class Main {
+
+    public static String reverseString(String input) {
+        Stack<Character> stack = new Stack<>();
+        String reversedString = "";
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        while (!stack.isEmpty()) {
+            reversedString += stack.pop();
+        }
+        return reversedString;
+    }
+
+
+    public static void main(String[] args) {
+
+        String myString = "hello";
+        String reversedString = reverseString(myString);
+        System.out.println(reversedString);
+
+        /*
+            EXPECTED OUTPUT:
+            ----------------
+            olleh
+        */
+
+    }
+}
