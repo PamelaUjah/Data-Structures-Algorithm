@@ -1,7 +1,6 @@
-package DoublyLinkedLists;
+package doublylinkedlists.codingExcercises;
 
-public class PalindromeChecker {
-
+public class DLLRemoveFirst {
     private Node head;
     private Node tail;
     private int length;
@@ -16,7 +15,7 @@ public class PalindromeChecker {
         }
     }
 
-    public PalindromeChecker(int value) {
+    public DLLRemoveFirst(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -79,22 +78,48 @@ public class PalindromeChecker {
         length++;
     }
 
-    public boolean isPalindrome() {
-        Node pointer1 = head;
-        Node pointer2 = tail;
-
-        if (length <= 1) {
-            return true;
+    public Node removeLast() {
+        if (length == 0) return null;
+        Node temp = tail;
+        if (length == 1) {
+            head = null;
+            tail = null;
         } else {
-            for (int i = 0; i < length / 2; i++) {
-                if (pointer1.value == pointer2.value) {
-                    pointer1 = pointer1.next;
-                    pointer2 = pointer2.prev;
-                } else {
-                    return false;
-                }
-            }
-            return true;
+            tail = tail.prev;
+            tail.next = null;
+            temp.prev = null;
         }
+        length--;
+        return temp;
+    }
+
+    public void prepend(int value) {
+        Node newNode = new Node(value);
+        if (length == 0) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+        }
+        length++;
+    }
+
+    public Node removeFirst() {
+        Node temp = head;
+        if (length == 0) {
+            return null;
+        } else if (length == 1) {
+            head = null;
+            tail = null;
+            length--;
+        } else {
+            head = head.next;
+            head.prev = null;
+            temp.next = null;
+            length--;
+        }
+        return temp;
     }
 }

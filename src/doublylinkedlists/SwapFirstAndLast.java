@@ -1,6 +1,7 @@
-package DoublyLinkedLists.CodingExcercises;
+package doublylinkedlists;
 
-public class DLLPrepend {
+public class SwapFirstAndLast {
+
     private Node head;
     private Node tail;
     private int length;
@@ -15,7 +16,7 @@ public class DLLPrepend {
         }
     }
 
-    public DLLPrepend(int value) {
+    public SwapFirstAndLast(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -78,34 +79,14 @@ public class DLLPrepend {
         length++;
     }
 
-    public Node removeLast() {
-        if (length == 0) return null;
-        Node temp = tail;
-        if (length == 1) {
-            head = null;
-            tail = null;
+    public void swapFirstLast() {
+        if (length < 2) {
+            return;
         } else {
-            tail = tail.prev;
-            tail.next = null;
-            temp.prev = null;
+            int temp = head.value;
+            head.value = tail.value;
+            tail.value = temp;
         }
-        length--;
-        return temp;
     }
 
-
-    public void prepend(int value) {
-        Node newNode = new Node(value);
-
-        if (length == 0) {
-            head = newNode;
-            tail = newNode;
-        } else {
-            newNode.next = head;
-            head.prev = newNode;
-            head = newNode;
-            length++;
-        }
-
-    }
 }

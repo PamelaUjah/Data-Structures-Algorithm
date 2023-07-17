@@ -1,4 +1,4 @@
-package DoublyLinkedLists.CodingExcercises;
+package doublylinkedlists.codingExcercises;
 
 public class DLLRemoveLast {
     private Node head;

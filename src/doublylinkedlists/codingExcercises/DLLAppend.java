@@ -1,4 +1,4 @@
-package DoublyLinkedLists.CodingExcercises;
+package doublylinkedlists.codingExcercises;
 
 public class DLLAppend {
     private Node head;

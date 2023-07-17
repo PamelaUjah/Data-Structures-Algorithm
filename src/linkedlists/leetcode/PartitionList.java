@@ -1,6 +1,6 @@
-package DoublyLinkedLists.CodingExcercises;
+package linkedlists.leetcode;
 
-public class DLLRemoveFirst {
+public class PartitionList {
     private Node head;
     private Node tail;
     private int length;
@@ -8,14 +8,13 @@ public class DLLRemoveFirst {
     class Node {
         int value;
         Node next;
-        Node prev;
 
         Node(int value) {
             this.value = value;
         }
     }
 
-    public DLLRemoveFirst(int value) {
+    public PartitionList(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -51,7 +50,7 @@ public class DLLRemoveFirst {
             System.out.println("Tail: " + tail.value);
         }
         System.out.println("Length:" + length);
-        System.out.println("\nDoubly Linked List:");
+        System.out.println("\nLinked List:");
         if (length == 0) {
             System.out.println("empty");
         } else {
@@ -72,54 +71,35 @@ public class DLLRemoveFirst {
             tail = newNode;
         } else {
             tail.next = newNode;
-            newNode.prev = tail;
             tail = newNode;
         }
         length++;
     }
 
-    public Node removeLast() {
-        if (length == 0) return null;
-        Node temp = tail;
-        if (length == 1) {
-            head = null;
-            tail = null;
-        } else {
-            tail = tail.prev;
-            tail.next = null;
-            temp.prev = null;
+    public void partitionList(int x) {
+        if (head == null) {
+            return;
         }
-        length--;
-        return temp;
-    }
 
-    public void prepend(int value) {
-        Node newNode = new Node(value);
-        if (length == 0) {
-            head = newNode;
-            tail = newNode;
-        } else {
-            newNode.next = head;
-            head.prev = newNode;
-            head = newNode;
-        }
-        length++;
-    }
+        Node dummy1 = new Node(0);
+        Node dummy2 = new Node(0);
+        Node prev1 = dummy1;
+        Node prev2 = dummy2;
+        Node current = head;
 
-    public Node removeFirst() {
-        Node temp = head;
-        if (length == 0) {
-            return null;
-        } else if (length == 1) {
-            head = null;
-            tail = null;
-            length--;
-        } else {
-            head = head.next;
-            head.prev = null;
-            temp.next = null;
-            length--;
+        while (current != null) {
+            if (current.value < x) {
+                prev1.next = current;
+                prev1 = current;
+            } else {
+                prev2.next = current;
+                prev2 = current;
+            }
+            current = current.next;
         }
-        return temp;
+
+        prev2.next = null;
+        prev1.next = dummy2.next;
+        head = dummy1.next;
     }
 }

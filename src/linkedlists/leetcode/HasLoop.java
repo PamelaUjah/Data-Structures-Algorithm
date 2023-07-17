@@ -1,6 +1,7 @@
-package DoublyLinkedLists;
+package linkedlists.leetcode;
 
-public class Reverse {
+public class HasLoop {
+
     private Node head;
     private Node tail;
     private int length;
@@ -8,14 +9,13 @@ public class Reverse {
     class Node {
         int value;
         Node next;
-        Node prev;
 
         Node(int value) {
             this.value = value;
         }
     }
 
-    public Reverse(int value) {
+    public HasLoop(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -51,7 +51,7 @@ public class Reverse {
             System.out.println("Tail: " + tail.value);
         }
         System.out.println("Length:" + length);
-        System.out.println("\nDoubly Linked List:");
+        System.out.println("\nLinked List:");
         if (length == 0) {
             System.out.println("empty");
         } else {
@@ -72,43 +72,23 @@ public class Reverse {
             tail = newNode;
         } else {
             tail.next = newNode;
-            newNode.prev = tail;
             tail = newNode;
         }
         length++;
     }
 
-    public Node get(int index) {
-        if (index < 0 || index >= length) return null;
-        Node temp = head;
-        if (index < length / 2) {
-            for (int i = 0; i < index; i++) {
-                temp = temp.next;
-            }
-        } else {
-            temp = tail;
-            for (int i = length - 1; i > index; i--) {
-                temp = temp.prev;
+    public boolean hasLoop() {
+        Node fast = head;
+        Node slow = head;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+
+            if (slow == fast) {
+                return true;
             }
         }
-        return temp;
-    }
-
-    public void reverse() {
-
-        Node currentNode = head;
-        Node tempNode = null;
-
-        while (currentNode != null) {
-            tempNode = currentNode.prev;
-            currentNode.prev = currentNode.next; //pointers are swapped using temp node to assist.
-            currentNode.next = tempNode;
-            currentNode = currentNode.prev; // set to prev as pointers have been swapped
-        }
-        tempNode = head;
-        head = tail;
-        tail = tempNode;
+        return false;
     }
 }
-
-

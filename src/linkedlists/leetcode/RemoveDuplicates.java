@@ -1,7 +1,8 @@
-package DoublyLinkedLists;
+package linkedlists.leetcode;
 
-public class SwapFirstAndLast {
+import java.util.HashSet;
 
+public class RemoveDuplicates {
     private Node head;
     private Node tail;
     private int length;
@@ -9,14 +10,13 @@ public class SwapFirstAndLast {
     class Node {
         int value;
         Node next;
-        Node prev;
 
         Node(int value) {
             this.value = value;
         }
     }
 
-    public SwapFirstAndLast(int value) {
+    public RemoveDuplicates(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -52,7 +52,7 @@ public class SwapFirstAndLast {
             System.out.println("Tail: " + tail.value);
         }
         System.out.println("Length:" + length);
-        System.out.println("\nDoubly Linked List:");
+        System.out.println("\nLinked List:");
         if (length == 0) {
             System.out.println("empty");
         } else {
@@ -73,20 +73,26 @@ public class SwapFirstAndLast {
             tail = newNode;
         } else {
             tail.next = newNode;
-            newNode.prev = tail;
             tail = newNode;
         }
         length++;
     }
 
-    public void swapFirstLast() {
-        if (length < 2) {
-            return;
-        } else {
-            int temp = head.value;
-            head.value = tail.value;
-            tail.value = temp;
+    public void removeDuplicates() {
+        HashSet<Integer> values = new HashSet();
+        Node current = head;
+        Node previous = null;
+
+        while (current != null) {
+            if (values.contains(current.value)) {
+                previous.next = current.next;
+                length--;
+                current = current.next;
+            } else {
+                values.add(current.value);
+                previous = current;
+                current = current.next;
+            }
         }
     }
-
 }

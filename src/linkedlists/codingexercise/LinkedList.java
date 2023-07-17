@@ -1,4 +1,4 @@
-package LinkedLists.CodingExercise;
+package linkedlists.codingexercise;
 
 public class LinkedList {
     private Node head;

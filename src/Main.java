@@ -1,4 +1,4 @@
-import LinkedLists.CodingExercise.LinkedList;
+import linkedlists.codingexercise.LinkedList;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
-package DoublyLinkedLists.CodingExcercises;
+package doublylinkedlists.codingExcercises;
 
-public class DLLRemove {
+public class DLLInsert {
 
     private Node head;
     private Node tail;
@@ -16,7 +16,7 @@ public class DLLRemove {
         }
     }
 
-    public DLLRemove(int value) {
+    public DLLInsert(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -133,41 +133,25 @@ public class DLLRemove {
     }
 
     public boolean insert(int index, int value) {
-        if (index < 0 || index > length) return false;
-        if (index == 0) {
+
+        if (index < 0 || index > length) {
+            return false;
+        } else if (index == 0) {
             prepend(value);
             return true;
-        }
-        if (index == length) {
+        } else if (index == length) {
             append(value);
             return true;
-        }
-        Node newNode = new Node(value);
-        Node before = get(index - 1);
-        Node after = before.next;
-        newNode.prev = before;
-        newNode.next = after;
-        before.next = newNode;
-        after.prev = newNode;
-        length++;
-        return true;
-    }
-
-    public Node remove(int index) {
-        Node temp = get(index);
-        if (index < 0 || index >= length) {
-            return null;
-        } else if (index == 0) {
-            removeFirst();
-        } else if (index == length - 1) {
-            removeLast();
         } else {
-            temp.prev.next = temp.next;
-            temp.next.prev = temp.prev;
-            temp.prev = null;
-            temp.next = null;
-            length--;
+            Node newNode = new Node(value);
+            Node before = get(index - 1);
+            Node after = before.next;
+            newNode.prev = before;
+            newNode.next = after;
+            before.next = newNode;
+            after.prev = newNode;
+            length++;
+            return true;
         }
-        return temp;
     }
 }

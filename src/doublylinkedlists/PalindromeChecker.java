@@ -1,6 +1,7 @@
-package DoublyLinkedLists;
+package doublylinkedlists;
 
-public class SwapNodes {
+public class PalindromeChecker {
+
     private Node head;
     private Node tail;
     private int length;
@@ -15,7 +16,7 @@ public class SwapNodes {
         }
     }
 
-    public SwapNodes(int value) {
+    public PalindromeChecker(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -69,42 +70,31 @@ public class SwapNodes {
         Node newNode = new Node(value);
         if (length == 0) {
             head = newNode;
+            tail = newNode;
         } else {
-            Node current = head;
-            while (current.next != null) {
-                current = current.next;
-            }
-            current.next = newNode;
-            newNode.prev = current;
+            tail.next = newNode;
+            newNode.prev = tail;
+            tail = newNode;
         }
         length++;
     }
 
-    public void swapPairs() {
-        Node dummy = new Node(0);
-        dummy.next = head;
-        Node prev = dummy;
+    public boolean isPalindrome() {
+        Node pointer1 = head;
+        Node pointer2 = tail;
 
-        while (head != null && head.next != null) {
-            Node firstNode = head;
-            Node secondNode = head.next;
-
-            prev.next = secondNode;
-            firstNode.next = secondNode.next;
-            secondNode.next = firstNode;
-
-            secondNode.prev = prev;
-            firstNode.prev = secondNode;
-
-            if (firstNode.next != null) {
-                firstNode.next.prev = firstNode;
+        if (length <= 1) {
+            return true;
+        } else {
+            for (int i = 0; i < length / 2; i++) {
+                if (pointer1.value == pointer2.value) {
+                    pointer1 = pointer1.next;
+                    pointer2 = pointer2.prev;
+                } else {
+                    return false;
+                }
             }
-            head = firstNode.next;
-            prev = firstNode;
-        }
-        head = dummy.next;
-        if (head != null) {
-            head.prev = null;
+            return true;
         }
     }
 }

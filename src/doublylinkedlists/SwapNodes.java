@@ -1,8 +1,6 @@
-package LinkedLists.Leetcode;
+package doublylinkedlists;
 
-import java.util.HashSet;
-
-public class RemoveDuplicates {
+public class SwapNodes {
     private Node head;
     private Node tail;
     private int length;
@@ -10,13 +8,14 @@ public class RemoveDuplicates {
     class Node {
         int value;
         Node next;
+        Node prev;
 
         Node(int value) {
             this.value = value;
         }
     }
 
-    public RemoveDuplicates(int value) {
+    public SwapNodes(int value) {
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -52,7 +51,7 @@ public class RemoveDuplicates {
             System.out.println("Tail: " + tail.value);
         }
         System.out.println("Length:" + length);
-        System.out.println("\nLinked List:");
+        System.out.println("\nDoubly Linked List:");
         if (length == 0) {
             System.out.println("empty");
         } else {
@@ -70,29 +69,42 @@ public class RemoveDuplicates {
         Node newNode = new Node(value);
         if (length == 0) {
             head = newNode;
-            tail = newNode;
         } else {
-            tail.next = newNode;
-            tail = newNode;
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+            newNode.prev = current;
         }
         length++;
     }
 
-    public void removeDuplicates() {
-        HashSet<Integer> values = new HashSet();
-        Node current = head;
-        Node previous = null;
+    public void swapPairs() {
+        Node dummy = new Node(0);
+        dummy.next = head;
+        Node prev = dummy;
 
-        while (current != null) {
-            if (values.contains(current.value)) {
-                previous.next = current.next;
-                length--;
-                current = current.next;
-            } else {
-                values.add(current.value);
-                previous = current;
-                current = current.next;
+        while (head != null && head.next != null) {
+            Node firstNode = head;
+            Node secondNode = head.next;
+
+            prev.next = secondNode;
+            firstNode.next = secondNode.next;
+            secondNode.next = firstNode;
+
+            secondNode.prev = prev;
+            firstNode.prev = secondNode;
+
+            if (firstNode.next != null) {
+                firstNode.next.prev = firstNode;
             }
+            head = firstNode.next;
+            prev = firstNode;
+        }
+        head = dummy.next;
+        if (head != null) {
+            head.prev = null;
         }
     }
 }
