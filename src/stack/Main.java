@@ -2,11 +2,26 @@ package stack;
 
 public class Main {
 
-    public static String reverseString(String input) {
+    public static Boolean isBalancedParentheses(String string) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char p : string.toCharArray()) {
+            if (String.valueOf(p).contains("(")) {
+                stack.push(p);
+            } else if (String.valueOf(p).contains(")")) {
+                if (stack.isEmpty() || stack.pop() != '(')
+                    return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+
+
+    public static String reverseString(String string) {
         Stack<Character> stack = new Stack<>();
         String reversedString = "";
 
-        for (char c : input.toCharArray()) {
+        for (char c : string.toCharArray()) {
             stack.push(c);
         }
 
